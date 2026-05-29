@@ -10,4 +10,5 @@ public interface AdminJpaRepository extends JpaRepository<AdminEntity, Long> {
     Optional<AdminEntity> findByLogin(String login);
 
     boolean existsByLogin(String login);
+
 }
