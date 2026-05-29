@@ -10,12 +10,16 @@ import java.util.List;
 
 @Service
 public class AdminService {
-    private final AdminJpaRepository adminRepo;
-    public AdminService(AdminJpaRepository adminRepo){this.adminRepo = adminRepo;}
-    public List<AdminEntity> getAll() {
+    private final AdminRepository adminRepo;
+    public AdminService(AdminRepository adminRepo){this.adminRepo = adminRepo;}
+    public List<Admin> getAll() {
         return adminRepo.findAll();
     }
-    public AdminEntity save(AdminEntity admin) {
+    public Admin save(Admin admin) {
         return adminRepo.save(admin);
+    }
+
+    public void delete(Long id){
+        adminRepo.delete(id);
     }
 }

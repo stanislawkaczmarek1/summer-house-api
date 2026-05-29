@@ -7,6 +7,7 @@ import com.cottages.backend.infrastructure.repository.AdminJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -24,13 +25,40 @@ public class AdminRepositoryAdapter implements AdminRepository {
     public boolean existsByLogin(String login) {
         return jpaRepository.existsByLogin(login);
     }
-
+    @Override
+    public Admin save(Admin admin){
+        AdminEntity entity = toEntity(admin);
+        AdminEntity saved = jpaRepository.save(entity);
+        return toModel(saved);
+    }
+    @Override
+    public List<Admin> findAll(){
+        return jpaRepository.findAll()
+                .stream()
+                .map(this::toModel)
+                .toList();
+    }
+    @Override
+    public void delete(Long id) {
+        if (!jpaRepository.existsById(id)) {
+            throw new RuntimeException("Admin not found");
+        }
+        jpaRepository.deleteById(id);
+    }
     private Admin toModel(AdminEntity entity) {
         return new Admin(
                 entity.getId(),
                 entity.getLogin(),
                 entity.getPasswordHash(),
                 entity.getCreatedAt()
+        );
+    }
+    private AdminEntity toEntity(Admin admin) {
+        return new AdminEntity(
+                admin.getId(),
+                admin.getLogin(),
+                admin.getPasswordHash(),
+                admin.getCreatedAt()
         );
     }
 }
