@@ -23,7 +23,14 @@ public class CottageImageRepositoryAdapter implements CottageImageRepository {
                 .map(this::toModel)
                 .toList();
     }
-
+    @Override
+    public void saveAll(List<CottageImage> images) {
+        jpaRepository.saveAll(
+                images.stream()
+                        .map(this::toEntity)
+                        .toList()
+        );
+    }
     @Override
     public Optional<CottageImage> findById(Long id) {
         return jpaRepository.findById(id).map(this::toModel);

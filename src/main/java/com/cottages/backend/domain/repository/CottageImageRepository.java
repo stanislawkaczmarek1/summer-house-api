@@ -16,4 +16,5 @@ public interface CottageImageRepository {
     void deleteById(Long id);
 
     int countByCottageId(Long cottageId);
+    public void saveAll(List<CottageImage> images);
 }
