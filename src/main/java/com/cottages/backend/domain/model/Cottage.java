@@ -73,4 +73,12 @@ public class Cottage {
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setImages(List<CottageImage> images) { this.images = images; }
     public void setAmenities(List<Amenity> amenities) { this.amenities = amenities; }
+
+    public Boolean getVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(Boolean visible) {
+        isVisible = visible;
+    }
 }

@@ -1,5 +1,6 @@
 package com.cottages.backend.infrastructure.adapter;
 
+import com.cottages.backend.domain.model.Admin;
 import com.cottages.backend.domain.model.Client;
 import com.cottages.backend.domain.repository.ClientRepository;
 import com.cottages.backend.infrastructure.entity.ClientEntity;
@@ -7,6 +8,7 @@ import com.cottages.backend.infrastructure.repository.ClientJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -33,6 +35,20 @@ public class ClientRepositoryAdapter implements ClientRepository {
     @Override
     public boolean existsByEmail(String email) {
         return jpaRepository.existsByEmail(email);
+    }
+    @Override
+    public List<Client> findAll(){
+        return jpaRepository.findAll()
+                .stream()
+                .map(this::toModel)
+                .toList();
+    }
+    @Override
+    public void delete(Long id) {
+        if (!jpaRepository.existsById(id)) {
+            throw new RuntimeException("Client not found");
+        }
+        jpaRepository.deleteById(id);
     }
 
     private Client toModel(ClientEntity entity) {
