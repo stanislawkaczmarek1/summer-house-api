@@ -17,6 +17,7 @@ public interface ReservationRepository {
     Optional<Reservation> findById(Long id);
 
     Reservation save(Reservation reservation);
+    void deleteById(Long id);
 
     boolean existsOverlappingReservation(Long cottageId, LocalDate startDate, LocalDate endDate);
 }

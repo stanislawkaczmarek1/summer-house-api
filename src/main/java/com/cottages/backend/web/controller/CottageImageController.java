@@ -3,10 +3,12 @@ package com.cottages.backend.web.controller;
 import com.cottages.backend.application.dto.CottageImageOrderRequest;
 import com.cottages.backend.application.service.CottageImageService;
 import com.cottages.backend.domain.model.CottageImage;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@CrossOrigin
 public class CottageImageController {
 
     private final CottageImageService imService;

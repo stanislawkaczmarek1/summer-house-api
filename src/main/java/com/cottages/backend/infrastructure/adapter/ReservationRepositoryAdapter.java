@@ -51,6 +51,14 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
         ReservationEntity entity = toEntity(reservation);
         return toModel(jpaRepository.save(entity));
     }
+    @Override
+    public void deleteById(Long id) {
+        if (!jpaRepository.existsById(id)) {
+            throw new RuntimeException("Reservation not found: " + id);
+        }
+
+        jpaRepository.deleteById(id);
+    }
 
     @Override
     public boolean existsOverlappingReservation(Long cottageId, LocalDate startDate, LocalDate endDate) {
