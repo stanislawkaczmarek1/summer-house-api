@@ -11,6 +11,11 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class AmenityController {
+    /*GET    /api/amenities                             # publiczne – lista udogodnień
+      POST   /api/amenities                             # admin – dodanie udogodnienia
+      POST   /api/amenities/bulk                        # admin – dodanie wielu udogodnień naraz
+      PATCH  /api/amenities/{id}                        # admin – edycja udogodnienia
+      DELETE /api/amenities/{id}                        # admin – usunięcie udogodnienia*/
     private final AmenityService amenityService;
     public AmenityController(AmenityService amenityService){this.amenityService = amenityService;}
     @PostMapping("/api/amenities/bulk")

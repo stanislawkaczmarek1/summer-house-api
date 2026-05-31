@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: admin
+      changes:
+        - sqlFile:
+            path: db/changelog/migrations/v1_init_db.sql
+            relativeToChangelogFile: false
+            splitStatements: true
+            stripComments: true
