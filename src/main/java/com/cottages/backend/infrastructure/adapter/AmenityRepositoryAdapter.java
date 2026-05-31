@@ -44,6 +44,17 @@ public class AmenityRepositoryAdapter implements AmenityRepository {
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }
+    @Override
+    public List<Amenity> saveAll(List<Amenity> amenities) {
+
+        List<AmenityEntity> entities = amenities.stream()
+                .map(this::toEntity)
+                .toList();
+
+        return jpaRepository.saveAll(entities).stream()
+                .map(this::toModel)
+                .toList();
+    }
 
     private Amenity toModel(AmenityEntity entity) {
         return new Amenity(entity.getId(), entity.getName());

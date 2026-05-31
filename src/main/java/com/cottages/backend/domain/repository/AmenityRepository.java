@@ -16,4 +16,5 @@ public interface AmenityRepository {
     Amenity save(Amenity amenity);
 
     void deleteById(Long id);
+    List<Amenity> saveAll(List<Amenity> amenities);
 }
