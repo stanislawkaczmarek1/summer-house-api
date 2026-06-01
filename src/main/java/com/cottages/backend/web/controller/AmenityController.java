@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class AmenityController {
     private final AmenityService amenityService;
     public AmenityController(AmenityService amenityService){this.amenityService = amenityService;}
@@ -23,10 +23,6 @@ public class AmenityController {
     @PostMapping("/api/amenities")
     public Amenity save(Amenity amenity){
         return amenityService.save(amenity);
-    }
-    @PostMapping("/api/amenities/bulk")
-    public void addBulk(List<String> names){
-        amenityService.addAmenitiesBulk(names);
     }
     @PatchMapping("/api/amenities/{id}")
     public Amenity update(Long id, Amenity amenity){
